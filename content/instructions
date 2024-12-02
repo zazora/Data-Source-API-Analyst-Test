@@ -1,0 +1,237 @@
+*API Documentation
+-зарегистрироваться на github, зайти в личный кабинет>настройки>настройки разработчика>сгенерировать личный токен (classic)
+
+-главная страница для работы с API REST
+(https://docs.github.com/en/rest)
+
+-перейти в раздел доступных endpoint
+authentication/endpoints-available-for-github-app-user-access-tokens
+
+-перейти в подраздел commits
+https://docs.github.com/en/rest/commits
+изучить параметры для получения коммита
+params
+owner — владелец учетной записи репозитория (нечувствителен к регистру)
+repo — название репозитория (нечувствителен к регистру)
+ref — ссылка на commitМожет быть SHA-идентификатором коммита - commit_sha,именем ветки- heads/BRANCH_NAME, именем тега- tags/TAG_NAME
+
+-перейти в подраздел поиск
+(https://docs.github.com/en/rest/search/search) 
+уточнить с помощью GET запроса репозитории с публичным статусом
+для запроса применить консоль и код curl, в параметр запроса `q` ввести соответствующие задаче квалификаторы и ключевые слова
+чтобы проверить названия и содержание ключей для дальнейшей фильтрации
+рационально сделать предварительный запрос через консоль
+template
+curl -L \ 
+-H "Accept: application/vnd.github+json" \ 
+-H "Authorization: Bearer <YOUR-TOKEN>" \ 
+-H "X-GitHub-Api-Version: 2022-11-28" \ 
+"https://api.github.com/search/repositories?q=public"
+
+response example
+{
+      "id": 15826533,
+      "node_id": "MDEwOlJlcG9zaXRvcnkxNTgyNjUzMw==",
+      "name": "q",
+      "full_name": "grantila/q",
+      "private": false,
+      "owner": {
+        "login": "grantila",
+        "id": 5362579,
+        "node_id": "MDQ6VXNlcjUzNjI1Nzk=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/5362579?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/grantila",
+        "html_url": "https://github.com/grantila",
+        "followers_url": "https://api.github.com/users/grantila/followers",
+        "following_url": "https://api.github.com/users/grantila/following{/other_user}",
+        "gists_url": "https://api.github.com/users/grantila/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/grantila/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/grantila/subscriptions",
+        "organizations_url": "https://api.github.com/users/grantila/orgs",
+        "repos_url": "https://api.github.com/users/grantila/repos",
+        "events_url": "https://api.github.com/users/grantila/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/grantila/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/grantila/q",
+      "description": "A platform-independent promise library for C++, implementing asynchronous continuations.",
+      "fork": false,
+      "url": "https://api.github.com/repos/grantila/q",
+      "forks_url": "https://api.github.com/repos/grantila/q/forks",
+      "keys_url": "https://api.github.com/repos/grantila/q/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/grantila/q/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/grantila/q/teams",
+      "hooks_url": "https://api.github.com/repos/grantila/q/hooks",
+      "issue_events_url": "https://api.github.com/repos/grantila/q/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/grantila/q/events",
+      "assignees_url": "https://api.github.com/repos/grantila/q/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/grantila/q/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/grantila/q/tags",
+      "blobs_url": "https://api.github.com/repos/grantila/q/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/grantila/q/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/grantila/q/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/grantila/q/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/grantila/q/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/grantila/q/languages",
+      "stargazers_url": "https://api.github.com/repos/grantila/q/stargazers",
+      "contributors_url": "https://api.github.com/repos/grantila/q/contributors",
+      "subscribers_url": "https://api.github.com/repos/grantila/q/subscribers",
+      "subscription_url": "https://api.github.com/repos/grantila/q/subscription",
+      "commits_url": "https://api.github.com/repos/grantila/q/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/grantila/q/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/grantila/q/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/grantila/q/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/grantila/q/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/grantila/q/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/grantila/q/merges",
+      "archive_url": "https://api.github.com/repos/grantila/q/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/grantila/q/downloads",
+      "issues_url": "https://api.github.com/repos/grantila/q/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/grantila/q/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/grantila/q/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/grantila/q/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/grantila/q/labels{/name}",
+      "releases_url": "https://api.github.com/repos/grantila/q/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/grantila/q/deployments",
+      "created_at": "2014-01-11T17:06:02Z",
+      "updated_at": "2024-12-01T03:59:56Z",
+      "pushed_at": "2018-05-04T13:16:30Z",
+      "git_url": "git://github.com/grantila/q.git",
+      "ssh_url": "git@github.com:grantila/q.git",
+      "clone_url": "https://github.com/grantila/q.git",
+      "svn_url": "https://github.com/grantila/q",
+      "homepage": "http://libq.io",
+      "size": 13900,
+      "stargazers_count": 194,
+      "watchers_count": 194,
+      "language": "C++",
+      "has_issues": true,
+      "has_projects": true,
+      "has_downloads": true,
+      "has_wiki": true,
+      "has_pages": false,
+      "has_discussions": false,
+      "forks_count": 24,
+      "mirror_url": null,
+      "archived": false,
+      "disabled": false,
+      "open_issues_count": 11,
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "spdx_id": "Apache-2.0",
+        "url": "https://api.github.com/licenses/apache-2.0",
+        "node_id": "MDc6TGljZW5zZTI="
+      },
+      "allow_forking": true,
+      "is_template": false,
+      "web_commit_signoff_required": false,
+      "topics": [
+        "asynchronous-continuations",
+        "asynchronous-tasks",
+        "event-loops",
+        "futures",
+        "promise",
+        "promises",
+        "thread"
+      ],
+      "visibility": "public",
+      "forks": 24,
+      "open_issues": 11,
+      "watchers": 194,
+      "default_branch": "master",
+      "permissions": {
+        "admin": false,
+        "maintain": false,
+        "push": false,
+        "triage": false,
+        "pull": true
+      },
+      "score": 1.0
+    }
+  ]
+}
+
+- изучить фрагмент полученного ответа json, теперь имеем записи для корректного введения параметров в последующих запросах
+example params 
+"visibility":"public","private":"false","disabled":"false","archived":"false","created_at":"2024", "language":"Python","owner":{"login":""},  "name":"", "type":"Organization","watchers":"" 
+
+для более детализиваного поиска данных рекомендуется использовать параметр `q` для определения условий поиска q=tom+repos:%3E42+followers:%3E1000 (выведет пользователей с именем tom,репозиториев более 42, подписчиков более 1000)
+
+если запрос не в curl в качестве значения заголовка User-Agent использовать имя пользователя GitHub
+
+-запросить доступные публичные репозитории
+-подготовить запросы в соответствии с заданием и применением параметров
+
+*Rate&query-length limits
+Для запросов без проверки подлинности ограничение скорости позволяет выполнять не более 10 запросов в минуту.
+Для прошедших проверку подлинности запросов можно выполнять до 30 запросов в минуту для всех конечных точек поиска.
+Длина запросов <= 256 символов (не включая операторы и квалификаторы);
+запрос включает <= 5 операторов AND,OR, NOT.
+Для определения разрешений, необходимых для доступа к конечной точке REST API.     X-Accepted-GitHub-Permissions: pull_requests=read,contents=read,issues=read означает, что вашему мелкозернистому токену личного доступа требуется либо разрешение на чтение запроса на вытягивание и разрешение на чтение содержимого, либо разрешение на чтение проблем и разрешение на чтение содержимого.
+
+*Pagination
+per_page — количество результатов на странице(не более 100)
+page — номер страницы
+sort — сортировка по (example: stars-рейтинг) 
+order — нисходящий/восходящий порядок сортировки(desc/asc)
+*Troubleshooting&handling errors
+          Коды ошибок:
+          - "401 Unauthorized", неверные учетные данные, проверить токен аутентификации.
+          - "403 Forbidden", уточнить права доступа к репозиторию.
+          (X-Accepted-GitHub-Permissions предоставляются в ответе REST API).
+          - "400 Bad request", ошибка на стороне клиента, неверные данные или ошибки в коде.
+          - "404 Not found", ресурс не найден
+          - "409 Conflict" конфликт изменения данных (маловероятен только при получении данных)
+          - "422 Unprocessable Entry" сбой проверки доступа к репозиториям, получить доступ
+          Запросы без корректного заголовка User-Agent будут отклонены, для значения User-Agent следует использовать ваше имя пользователя, при этом, curl отправляет допустимый User-Agent заголовок по умолчанию.
+          - "429 Too Many Requests", отступить и повторить запрос после прочтения заголовка Retry-After
+          - "500,503 Service unavailable", технические неполадки на стороне сервера
+       
+*Data extraction
+структура запросов:
+запрос в Google_colab
+import requests
+
+url = 'https://api.github.com'
+token = '******'
+user = '******'
+
+response = requests.get(
+url + "/search/repositories",
+params={
+	'q': 'GPT in:name language:Python followers:>20000',
+	'sort': 'stars',
+	'order': 'desc'
+},
+headers={
+	'Authorization': f'Bearer {token}',
+	'X-GitHub-Api-Version': '2022-11-28',
+	'Accept': 'application/vnd.github+json',
+	'User-Agent': user
+}
+)
+
+response.text
+
+запросы в Postman
+- создать коллекцию  Data-Source-API-Analyst-Test
+- создать переменные в коллекции:
+url = https://api.github.com
+token=******
+
+- создать запросы searchRepositories, searchCommits, соответственно
+             - GET {{url}}/search/repositories
+-в первом запросе 
+установить дополнительные параметры sort:stars & order:desc
+во вкладке scripts/Post-response прописать java script код для получения тела запроса и извлечения данных в переменные "owner" и "repo" для добавления из в переменные коллекции и включения во второй запрос
+let data= pm.response.json()['items'];
+pm.collectionVariables.set("repo", data[0]["name"]);
+pm.collectionVariables.set("owner", data[0].owner.login);
+
+              - GET {{url}}/repos/{{owner}}/{{repo}}/commits
+-в обоих запросах установить параметр per_page 10
+-запустить коллекцию
